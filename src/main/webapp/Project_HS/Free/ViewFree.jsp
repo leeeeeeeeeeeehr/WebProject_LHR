@@ -35,8 +35,15 @@
                 <td class="post post_content" colspan="3">${ freedto.content }</td>
               </tr>
               <tr>
-                <td class="column">첨부파일</td>
-                <td class="post">
+           		<td class="column">첨부파일</td>
+           		<c:choose>
+           			<c:when test="${ empty freedto.ofile }">
+		                <td class="post" colspan="3">
+		            </c:when>
+		            <c:otherwise>
+		            	<td class="post">
+		            </c:otherwise>
+		        </c:choose>
                	<c:choose>
                		<c:when test="${ empty freedto.ofile }">
                			첨부된 파일이 없습니다.
@@ -44,21 +51,23 @@
                		<c:otherwise>
 	                	<c:if test="${ not empty freedto.ofile }">
        		        		${ freedto.ofile }
-               				<a href="../HS/download.do?ofile=${ freedto.ofile }&sfile=${ freedto.sfile }&num=${ freedto.num }">[다운로드]</a>
+               				<a class="download_btn" href="../HS/download-free.do?ofile=${ freedto.ofile }&sfile=${ freedto.sfile }&num=${ freedto.num }">[다운로드]</a>
                			</c:if>
                		</c:otherwise>
                	</c:choose>
                 </td>
+                <c:if test="${ not empty freedto.ofile }">
                 <td class="column">다운로드 수</td>
                 <td class="post">${ freedto.downCount }</td>
+                </c:if>
               </tr>
             </table>
 			<div class="etc_area">
 			<c:if test="${ sessionScope.userId != null && sessionScope.userId == freedto.id }">
-				<button type="button" onclick="location.href='../HS/pass.do?mode=edit&num=${ param.num }';">
+				<button type="button" onclick="location.href='../HS/edit-free.do?num=${ param.num }';">
 					수정하기
 				</button>
-				<button type="button" onclick="location.href='../HS/pass.do?mode=delete&num=${ param.num }';">
+				<button type="button" onclick="location.href='../HS/delete-free.do?num=${ param.num }';">
 				    삭제하기
 				</button>
 			</c:if>

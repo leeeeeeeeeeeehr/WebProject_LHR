@@ -1,4 +1,4 @@
-package utils;
+package controller.fileboard;
 
 import java.io.IOException;
 
@@ -7,10 +7,11 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import model.FreeBoardDAO;
+import model.FileBoardDAO;
+import utils.FileUtil;
 
-@WebServlet("/HS/download.do")
-public class DownloadController extends HttpServlet {
+@WebServlet("/HS/download-file.do")
+public class DownloadFileController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
 	@Override
@@ -22,12 +23,12 @@ public class DownloadController extends HttpServlet {
 		String num = req.getParameter("num");
 		
 		
-		FileUtil.download(req, resp, "/Uploads", sfile, ofile);
+		FileUtil.download(req, resp, "/Project_HS/UploadsFile", sfile, ofile);
 		
 		// 다운로드 카운트 증가
-		FreeBoardDAO freedao = new FreeBoardDAO();
-		freedao.updateDownloadCount(num);
-		freedao.close();
+		FileBoardDAO filedao = new FileBoardDAO();
+		filedao.updateDownloadCount(num);
+		filedao.close();
 	}
 
 }

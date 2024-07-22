@@ -645,6 +645,7 @@ caption.nohead {
 /* } */
 /* 칸에서 수직정렬이 기본값이며 vertical-align:top등으로 수직정렬 변경가능 */
 .board_list th {
+  width: 58%;
   height: 60px;
   /* vertical-align: top; */
   font-weight: 500;

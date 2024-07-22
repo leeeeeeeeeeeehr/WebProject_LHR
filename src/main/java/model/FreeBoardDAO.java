@@ -5,7 +5,6 @@ import java.util.Map;
 import java.util.Vector;
 
 import common.DBConnPool;
-import jakarta.servlet.http.HttpSession;
 
 public class FreeBoardDAO extends DBConnPool {
 	
@@ -43,13 +42,13 @@ public class FreeBoardDAO extends DBConnPool {
 		
 		// 페이징 처리
 		String query = "SELECT * FROM ( "
-						+ " SELECT free.*, ROWNUM rNum FROM ( "
+						+ " SELECT freeboard.*, ROWNUM rNum FROM ( "
 							+ "	SELECT * FROM free_board ";
 		if (map.get("searchWord") != null) {
 			query += " WHERE " + map.get("searchField")
 						+ " LIKE '%" + map.get("searchWord") + "%' ";
 		}
-		query += " ORDER BY num DESC) free) "
+		query += " ORDER BY num DESC) freeboard) "
 				+ " WHERE rNum BETWEEN ? AND ?";
 				
 		try {
@@ -169,6 +168,32 @@ public class FreeBoardDAO extends DBConnPool {
 		}
 	}
 	
+	// 게시물 수정
+	public int updatePost(FreeBoardDTO freedto) {
+		int result = 0;
+		
+		try {
+			String query = "UPDATE free_board "
+							+ " SET title=?, content=?, ofile=?, sfile=? "
+							+ " WHERE num=? and id=?";
+			
+			psmt = con.prepareStatement(query);
+			psmt.setString(1, freedto.getTitle());
+			psmt.setString(2, freedto.getContent());
+			psmt.setString(3, freedto.getOfile());
+			psmt.setString(4, freedto.getSfile());
+			psmt.setString(5, freedto.getNum());
+			psmt.setString(6, freedto.getId());
+			result = psmt.executeUpdate();
+		}
+		catch (Exception e) {
+			System.out.println("게시물 수정 중 예외 발생");
+			e.printStackTrace();
+		}
+		return result;
+	}
+	
+	
 	// 게시물 삭제
 	public int deletePost(String num) {
 		int result = 0;
@@ -186,5 +211,5 @@ public class FreeBoardDAO extends DBConnPool {
 		}
 		return result;
 	}
-
+	
 }

@@ -1,4 +1,4 @@
-package controller.freeboard;
+package controller.fileboard;
 
 import java.io.IOException;
 
@@ -9,17 +9,17 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import model.FreeBoardDAO;
-import model.FreeBoardDTO;
+import model.FileBoardDAO;
+import model.FileBoardDTO;
 import utils.FileUtil;
 import utils.JSFunction;
 
-@WebServlet("/HS/write-free.do")
+@WebServlet("/HS/write-file.do")
 @MultipartConfig(
 		maxFileSize = 1024 * 1024 * 1,
 		maxRequestSize = 1024 * 1024 * 10
 )
-public class WriteFreeController extends HttpServlet {
+public class WriteFileController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	@Override
@@ -29,10 +29,10 @@ public class WriteFreeController extends HttpServlet {
 		HttpSession session = req.getSession(false);
 		
 		if (session.getAttribute("userId") != null) {
-			req.getRequestDispatcher("/Project_HS/Free/WriteFree.jsp").forward(req, resp);			
+			req.getRequestDispatcher("/Project_HS/File/WriteFile.jsp").forward(req, resp);			
 		}
 		else {
-			JSFunction.alertLocation(resp, "로그인 후 이용해주세요.", "../HS/list-free/do");
+			JSFunction.alertLocation(resp, "로그인 후 이용해주세요.", "../HS/list-file/do");
 		}
 	}
 	
@@ -40,7 +40,7 @@ public class WriteFreeController extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
 											throws ServletException, IOException {
 	
-		String saveDirectory = req.getServletContext().getRealPath("/Project_HS/UploadsFree");
+		String saveDirectory = req.getServletContext().getRealPath("/Project_HS/UploadsFile");
 		
 		// 파일 업로드
 		String originalFileName = "";
@@ -50,43 +50,43 @@ public class WriteFreeController extends HttpServlet {
 		}
 		catch (Exception e) {
 			e.printStackTrace();
-			JSFunction.alertLocation(resp, "파일 업로드 오류입니다.", "../HS/write-free.do");
+			JSFunction.alertLocation(resp, "파일 업로드 오류입니다.", "../HS/write-file.do");
 			return;
 		}
 		
 		HttpSession session = req.getSession(false);
 		
 		// 제목이랑 내용 저장
-		FreeBoardDTO freedto = new FreeBoardDTO();
+		FileBoardDTO filedto = new FileBoardDTO();
 		// 세션에 저장되어있는 아이디 저장
-		freedto.setId((String) session.getAttribute("userId"));
+		filedto.setId((String) session.getAttribute("userId"));
 		// 게시글 제목, 내용 저장
-		freedto.setTitle(req.getParameter("title"));
-		freedto.setContent(req.getParameter("content"));
+		filedto.setTitle(req.getParameter("title"));
+		filedto.setContent(req.getParameter("content"));
 		
 		// 원본 파일명이 있으면
 		if (originalFileName != "") {
 			// 새로운 파일명으로 변경
 			String savedFileName = FileUtil.renameFile(saveDirectory, originalFileName);
 			// 원본 파일명과 새로운 파일명 저장
-			freedto.setOfile(originalFileName);
-			freedto.setSfile(savedFileName);
+			filedto.setOfile(originalFileName);
+			filedto.setSfile(savedFileName);
 		}
 		
 		String write = req.getParameter("write");
 		// 쓰기 요청이 있으면
 		if (write != null && write.equals("true")) {
-			FreeBoardDAO freedao = new FreeBoardDAO();
-			int result = freedao.freeWrite(freedto);
-			freedao.close();
+			FileBoardDAO filedao = new FileBoardDAO();
+			int result = filedao.fileWrite(filedto);
+			filedao.close();
 			
 			if (result == 1) {
 				System.out.println("게시물 업로드 성공");
-				System.out.println("제목=" + freedto.getTitle());
-				resp.sendRedirect("../HS/list-free.do");
+				System.out.println("제목=" + filedto.getTitle());
+				resp.sendRedirect("../HS/list-file.do");
 			}
 			else {
-				JSFunction.alertLocation(resp, "글쓰기에 실패했습니다.", "../HS/write-free.do");
+				JSFunction.alertLocation(resp, "글쓰기에 실패했습니다.", "../HS/write-file.do");
 			}
 		}
 	}

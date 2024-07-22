@@ -23,6 +23,7 @@ public class LoginController extends HttpServlet {
 		
 		HttpSession session = req.getSession();
 		
+		// 이미 로그인되어있으면 로그인 완료 페이지로
 		if (session.getAttribute("userId") != null) {
 			resp.sendRedirect("../HS/islogin.do");
 		}
