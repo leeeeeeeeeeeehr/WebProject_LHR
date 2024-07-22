@@ -1,4 +1,4 @@
-package controller;
+package controller.account;
 
 import java.io.IOException;
 
@@ -26,7 +26,7 @@ public class ModifyController extends HttpServlet {
 		// 로그인 되어있으면
 		if (session.getAttribute("userId") != null) {
 			// 회원정보 수정 페이지로
-			req.getRequestDispatcher("/Project_HS/Modify.jsp").forward(req, resp);
+			req.getRequestDispatcher("/Project_HS/Account/Modify.jsp").forward(req, resp);
 		}
 		// 로그인 안되어있으면
 		else {
@@ -70,11 +70,11 @@ public class ModifyController extends HttpServlet {
 				boolean isModify = dao.modifyMember(dto);
 				
 				if (isModify) {
-					resp.sendRedirect("../Project_HS/IsLogin.jsp");
+					resp.sendRedirect("../Project_HS/Account/IsLogin.jsp");
 					System.out.println("회원정보 수정 성공: " + newId);
 				}
 				else {
-					req.getRequestDispatcher("../Project_HS/Modify.jsp").forward(req, resp);
+					req.getRequestDispatcher("../Project_HS/Account/Modify.jsp").forward(req, resp);
 					System.out.println("회원정보 수정 중 예외 발생");
 				}
 			}

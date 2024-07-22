@@ -1,49 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="https://jakarta.ee/xml/ns/jakartaee" xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_5_0.xsd" id="WebApp_ID" version="5.0">
-  <display-name>WebProject_LHR</display-name>
-  <welcome-file-list>
-    <welcome-file>Default.jsp</welcome-file>
-  </welcome-file-list>
-    
-  <!-- 비밀번호 찾기 매핑 -->
-  <servlet>
-  	<servlet-name>HSFind</servlet-name>
-  	<servlet-class>controller.FindController</servlet-class>
-  </servlet>
-  <servlet-mapping>
-  	<servlet-name>HSFind</servlet-name>
-  	<url-pattern>/HS/find.do</url-pattern>
-  </servlet-mapping>
-  <!-- 게시글 상세보기 매핑 -->
-  <servlet>
-  	<servlet-name>HSView</servlet-name>
-  	<servlet-class>controller.ViewController</servlet-class>
-  </servlet>
-  <servlet-mapping>
-  	<servlet-name>HSView</servlet-name>
-  	<url-pattern>/HS/view.do</url-pattern>
-  </servlet-mapping>
-  <!-- 게시글 작성하기 매핑 -->
-  <servlet>
-  	<servlet-name>HSWrite</servlet-name>
-  	<servlet-class>controller.WriteController</servlet-class>
-  	<multipart-config>
-  		<max-file-size>104857600</max-file-size>				<!-- 100MB로 제한 -->
-  		<max-request-size>1048576000</max-request-size>			<!-- 1000MB로 제한 -->
-  	</multipart-config>
-  </servlet>
-  <servlet-mapping>
-  	<servlet-name>HSWrite</servlet-name>
-  	<url-pattern>/HS/write.do</url-pattern>
-  </servlet-mapping>
-  <!-- 게시글 수정하기 매핑 -->
-  <servlet>
-  	<servlet-name>HSEdit</servlet-name>
-  	<servlet-class>controller.EditController</servlet-class>
-  </servlet>
-  <servlet-mapping>
-  	<servlet-name>HSEdit</servlet-name>
-  	<url-pattern>/HS/edit.do</url-pattern>
-  </servlet-mapping>
+	<display-name>WebProject_LHR</display-name>
+	<welcome-file-list>
+	  	<welcome-file>Default.jsp</welcome-file>
+	</welcome-file-list>
   
+	<context-param>
+		<param-name>POSTS_PER_PAGE</param-name>
+		<param-value>10</param-value>
+	</context-param>
+	<context-param>
+		<param-name>PAGES_PER_BLOCK</param-name>
+		<param-value>5</param-value>
+	</context-param>
 </web-app>

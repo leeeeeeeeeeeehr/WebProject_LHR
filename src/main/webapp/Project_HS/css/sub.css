@@ -3,7 +3,7 @@
   --point-color1: #0b56a7;
   --point-color2: #173271;
   --gray-400: #333;
-  --gray-500: #111;
+  --gray-500: #222;
   --gray-600: #000;
 }
 
@@ -18,6 +18,12 @@
 }
 #header.sub_header .gnb>li>a {
   color: var(--gray-600);
+}
+#header.sub_header .session_check {
+  display: block;
+  margin-right: 50px;
+  margin-top: 5px;
+  color: #000;
 }
 #header.sub_header .login {
   background: var(--gray-600);
@@ -41,32 +47,23 @@
 }
 
 
-
 /* 서브_메인_공통 */
 .contents {
-  padding: 120px 0 160px;
+  padding: 150px 0 100px;
 }
 .contents .inner {
-  max-width: 1440px;
+  max-width: 448px;
   padding: 0 20px;
   margin: 0 auto;
 }
-
-
-
-/* 서브_로그인페이지 */
-.login_page .contents {
-  padding: 150px 0 100px 0;
-}
-.login_page .inner {
-  max-width: 448px;
-  margin: 0 auto;
-}
-.login_page .login_area {
+.contents .sub_area {
   border: 1px solid #efefef;
   border-radius: 6px;
   padding: 24px;
 }
+
+
+/* 로그인, 로그아웃 */
 /* 아이디 입력창 */
 .login_page .login_area .input_wrap1 {
   border-radius: 6px 6px 0 0;
@@ -94,13 +91,6 @@
   height: 46px;
   padding: 0 20px;
 }
-/* 로그인 상태 유지 */
-/* .login_page .login_area .row3 { */
-/*   font-size: 15px; */
-/* } */
-/* .login_page .login_area input[type=checkbox] + label { */
-/*   font-size: 15px; */
-/* } */
 /* 로그인 버튼 */
 .login_page .login_area .login_btn {
   width: 100%;
@@ -112,50 +102,7 @@
   border-radius: 6px;
   margin-top: 30px;
 }
-/* 비밀번호 찾기 / 회원가입 */
-.login_page .etc_area,
-.logout_page .etc_area {
-  margin-top: 20px;
-  text-align: center;
-}
-.login_page .etc_area li,
-.logout_page .etc_area li {
-  position: relative;
-  display: inline-block;
-}
-.login_page .etc_area li>a, 
-.logout_page .etc_area li>a {
-  font-size: 14px;
-  line-height: 17px;
-  color: #888;
-}
-.login_page .etc_area li+li,
-.logout_page .etc_area li+li {
-  padding-left: 28px;
-}
-.login_page .etc_area li+li::before {
-  content: '';
-  position: absolute;
-  top: 3px;
-  left: 12px;
-  width: 1px;
-  height: 12px;
-  background: #dadada;
-}
-
-/* 로그아웃 페이지 */
-.logout_page .contents {
-  padding: 150px 0 100px 0;
-}
-.logout_page .inner {
-  max-width: 448px;
-  margin: 0 auto;
-}
-.logout_page .logout_area {
-  border: 1px solid #efefef;
-  border-radius: 6px;
-  padding: 24px;
-}
+/* 로그아웃 버튼 */
 .logout_page .logout_area .logout_btn {
 	display: block;
 	width: 100%;
@@ -167,108 +114,108 @@
 	border-radius: 6px;
 	margin-top: 30px;
 }
-
-
-
-/* 서브_회원가입페이지 */
-.regist_page .contents {
-  padding: 150px 0 100px 0;
+.login_page .etc_area,
+.logout_page .etc_area {
+  margin-top: 20px;
+  text-align: center;
 }
-.regist_page .inner {
-  max-width: 448px;
-  margin: 0 auto;
+.write_page .etc_area,
+.view_page .etc_area {
+  margin: 40px 0 20px;
+  text-align: center;
 }
-.regist_page .regist_area {
+.login_page .etc_area li,
+.logout_page .etc_area li,
+.write_page .etc_area li {
+  position: relative;
+  display: inline-block;
+}
+.login_page .etc_area li>a, 
+.logout_page .etc_area li>a {
+  font-size: 14px;
+  line-height: 17px;
+  color: #888;
+}
+.write_page .etc_area li>a {
+  font-size: 16px;
+  color: #888;
   border: 1px solid #efefef;
   border-radius: 6px;
-  padding: 24px;
+  padding: 12px;
 }
-/*********** 입력창 시작 ***********/
-.regist_page .regist_area .input_wrap1 {
-  border-radius: 6px 6px 0 0;
+.write_page .etc_area .complete_btn {
+  padding: 12px;
   border: 1px solid #efefef;
-  margin-top: 30px;
+  background: var(--point-color1);
+  border-radius: 6px;
+  color: #fff;
 }
-.regist_page .regist_area .input_wrap2 {
-  border: 1px solid #efefef;
-  border-top: none;
+.login_page .etc_area li+li,
+.logout_page .etc_area li+li,
+.write_page .etc_area li+li {
+  padding-left: 28px;
 }
-.regist_page .regist_area .input_wrap3 {
-  border: 1px solid #efefef;
-  border-top: none;
+.login_page .etc_area li+li::before {
+  content: '';
+  position: absolute;
+  top: 3px;
+  left: 12px;
+  width: 1px;
+  height: 12px;
+  background: #dadada;
 }
-.regist_page .regist_area .input_wrap4 {
-  border: 1px solid #efefef;
-  border-top: none;
-}
-.regist_page .regist_area .input_wrap5 {
-  border-radius: 0 0 6px 6px;
-  border: 1px solid #efefef;
-  border-top: none;
-  margin-bottom: 15px;
-}
-/*********** 입력창 끝 ***********/
-/* 입력창 공통 */
-.regist_page .regist_area input[type=text] {
-  width: 100%;
+.view_page .etc_area button {
   border: none;
-  background: none;
-  height: 46px;
-  padding: 0 20px;
-}
-/* 가입완료 버튼 */
-.regist_page .regist_area .complete_btn {
-  display: block;
-  width: 100%;
-  border: none;
-  line-height: 52px;
+  line-height: 38px;
   background: var(--point-color1);
   color: #fff;
   text-align: center;
   border-radius: 6px;
-  margin-top: 30px;
+  margin-right: 10px;
+  padding: 0 12px;
 }
 
-/* 서브_회원정보수정페이지 */
-.modify_page .contents {
-  padding: 150px 0 100px 0;
+
+
+/* 로그인 상태 유지 */
+/* .login_page .login_area .row3 {
+  font-size: 15px;
 }
-.modify_page .inner {
-  max-width: 448px;
-  margin: 0 auto;
+.login_page .login_area input[type=checkbox] + label {
+  font-size: 15px;
 }
-.modify_page .modify_area {
-  border: 1px solid #efefef;
-  border-radius: 6px;
-  padding: 24px;
-}
-/*********** 입력창 시작 ***********/
+
+
+/* 회원 가입, 회원정보 수정 */
+.regist_page .regist_area .input_wrap1,
 .modify_page .modify_area .input_wrap1 {
   border-radius: 6px 6px 0 0;
   border: 1px solid #efefef;
   margin-top: 30px;
-  background: #dadada;
 }
+.regist_page .regist_area .input_wrap2,
 .modify_page .modify_area .input_wrap2 {
   border: 1px solid #efefef;
   border-top: none;
 }
+.regist_page .regist_area .input_wrap3,
 .modify_page .modify_area .input_wrap3 {
   border: 1px solid #efefef;
   border-top: none;
 }
+.regist_page .regist_area .input_wrap4,
 .modify_page .modify_area .input_wrap4 {
   border: 1px solid #efefef;
   border-top: none;
 }
+.regist_page .regist_area .input_wrap5,
 .modify_page .modify_area .input_wrap5 {
   border-radius: 0 0 6px 6px;
   border: 1px solid #efefef;
   border-top: none;
   margin-bottom: 15px;
 }
-/*********** 입력창 끝 ***********/
-/* 입력창 공통 */
+.regist_page .regist_area input[type=text],
 .modify_page .modify_area input[type=text] {
   width: 100%;
   border: none;
@@ -276,7 +223,7 @@
   height: 46px;
   padding: 0 20px;
 }
-/* 수정완료 버튼 */
+.regist_page .regist_area .complete_btn,
 .modify_page .modify_area .complete_btn {
   display: block;
   width: 100%;
@@ -290,9 +237,8 @@
 }
 
 
-
-
-/* 서브_리스트페이지_상단이미지 */
+/* 게시판 */
+/* 각각의 상단 이미지 */
 .list_page .free_visual {
   background: url(../images/sub_visual1.jpg) no-repeat left top / cover;
 }
@@ -302,6 +248,7 @@
 .list_page .file_visual {
   background: url(../images/sub_visual3.jpg) no-repeat left top / cover;
 }
+/* 게시판 공통 */
 .list_page .sub_visual .inner {
   max-width: 1440px;
   height: 740px;
@@ -341,14 +288,119 @@
   word-wrap: keep-all;
   margin-top: 36px;
 }
-/* 서브_리스트페이지_게시물목록 */
-.contents {
+
+
+/* 게시판 - 게시물 목록 */
+.list_page .contents {
   padding: 60px 0 100px;
 }
-.contents .inner {
-  max-width: 14400px;
+.list_page .contents .inner,
+.write_page .contents .inner,
+.view_page .contents .inner {
+  max-width: 1440px;
   margin: 0 auto;
 }
+.list_page .select_wrap {
+  display: inline-block;
+  border-radius: 3px;
+  border: 1px solid #efefef;
+  text-align: center;
+  color: var(--gray-400);
+  font-size: 18px;
+  padding: 8px 0;
+}
+.list_page input[type="text"] {
+  border: 1px solid #efefef;
+  border-radius: 3px;
+  color: #d8d8d8;
+}
+.list_page .submit_btn {
+  width: 75px;
+  border: none;
+  background: var(--point-color1);
+  border-radius: 3px;
+  line-height: 38px;
+  color: #fff;
+}
+.list_page .write_btn {
+  width: 75px;
+  border: none;
+  background: var(--point-color1);
+  border-radius: 3px;
+  line-height: 38px;
+  color: #fff;
+}
+
+/* 글 쓰기 공통 */
+.contents .write_area {
+  border: 1px solid #efefef;
+  border-radius: 6px;
+  padding: 24px;
+}
+.contents .write_form {
+  margin-top: 30px;
+  border: 1px solid #efefef;
+  border-radius: 6px;
+}
+.write_form input[type=text] {
+  width: 100%;
+  border: none;
+  background: none;
+  height: 46px;
+  padding: 0 20px;
+}
+.write_form input[type=file] {
+  width: 100%;
+  border: none;
+  background: none;
+  padding: 20px 20px;
+}
+.write_form textarea {
+  background: none;
+  padding: 15px 20px;
+  height: 200px;
+}
+.write_form .column {
+  width: 20%;
+  text-align: center;
+  border-right: 1px solid #efefef;
+}
+.write_form .line {
+  border-bottom: 1px solid #efefef;
+}
+.write_page .btn_wrap {
+  margin: 0 auto;
+}
+.write_page .btn_wrap .inner {
+  max-width: 448px;
+}
+
+.view_page table {
+  border: 1px solid #ddd;
+  border-right: none;
+}
+.view_page tr {
+  height: 60px;
+  border-bottom: 1px solid #ddd;
+}
+.view_page .column {
+  width: 12%;
+  font-weight: 500;
+  background: #f5f5f5;
+  text-align: center;
+  border-right: 1px solid #ddd;
+}
+.view_page .post {
+  padding: 20px;
+  border-right: 1px solid #ddd;
+}
+.view_page .post_content {
+  height: 200px;
+}
+
+
+
+
 
 
 
@@ -392,15 +444,14 @@
     margin-top: 30px;
   }
   /* 서브_리스트페이지_게시물목록_태블릿 */
-  .contents {
+  .list_page .contents {
     padding: 60px 0 100px;
   }
-  .contents .inner {
+  .list_page .contents .inner {
     padding: 0 40px;
     margin: 0 auto;
   }
 }
-
 
 
 /* 모바일 분기점 */

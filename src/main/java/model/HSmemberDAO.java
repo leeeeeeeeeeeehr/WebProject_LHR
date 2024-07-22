@@ -8,6 +8,7 @@ public class HSmemberDAO extends DBConnPool {
 		super();
 	}
 	
+	// 로그인
 	public HSmemberDTO loginMember(String id, String pass) {
 		HSmemberDTO dto = new HSmemberDTO();
 		
@@ -32,7 +33,8 @@ public class HSmemberDAO extends DBConnPool {
 		}
 		return dto;
 	}
-
+	
+	// 회원가입
 	public boolean registMember(HSmemberDTO dto) {
 		boolean isRegist = false;
 
@@ -59,6 +61,7 @@ public class HSmemberDAO extends DBConnPool {
 		return isRegist;
 	}
 	
+	// 회원정보 수정
 	public boolean modifyMember(HSmemberDTO dto) {
 		boolean isModify = false;
 		

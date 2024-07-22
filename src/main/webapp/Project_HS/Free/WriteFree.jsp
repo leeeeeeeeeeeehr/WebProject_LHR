@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
-<%@ include file="../Project_HS/include/common_head.jsp" %>
+<%@ include file="../include/common_head.jsp" %>
 
 <script>
 function validateForm(form) {
@@ -23,7 +23,7 @@ function validateForm(form) {
     <a href="#container">본문바로가기</a>
   </div>
   <div id="wrap">
-    <%@ include file="../Project_HS/include/body_header_sub.jsp" %>
+    <%@ include file="../include/body_header_sub.jsp" %>
     
     <main id="container" class="write_page sub_container">
       <div class="contents">
@@ -66,7 +66,7 @@ function validateForm(form) {
         </div>
       </div>
     </main>
-    <%@ include file="../Project_HS/include/body_footer.jsp" %>
+    <%@ include file="../include/body_footer.jsp" %>
   </div>
 </body>
 </html>

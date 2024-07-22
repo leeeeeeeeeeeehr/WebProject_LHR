@@ -1,4 +1,4 @@
-package controller;
+package controller.account;
 
 import java.io.IOException;
 
@@ -18,7 +18,7 @@ public class RegistController extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 											throws ServletException, IOException {
 
-		req.getRequestDispatcher("/Project_HS/Regist.jsp").forward(req, resp);
+		req.getRequestDispatcher("/Project_HS/Account/Regist.jsp").forward(req, resp);
 	}
 	
 	@Override

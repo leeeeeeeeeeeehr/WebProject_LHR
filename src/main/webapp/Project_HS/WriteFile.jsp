@@ -12,9 +12,9 @@
     <main id="container" class="write_page sub_container">
       <div class="contents">
         <div class="inner">
-          <div class="board_write">
+          <div class="board_write write_area">
             <div class="board_box">
-              <div class="board_write_wrap ">
+              <div class="board_write_wrap">
                 <table>
                   <caption class="nohead">문의사항 글쓰기</caption>
                   <tbody>

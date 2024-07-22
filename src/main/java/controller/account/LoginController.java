@@ -1,4 +1,4 @@
-package controller;
+package controller.account;
 
 import java.io.IOException;
 
@@ -27,7 +27,7 @@ public class LoginController extends HttpServlet {
 			resp.sendRedirect("../HS/islogin.do");
 		}
 		else {
-			req.getRequestDispatcher("/Project_HS/Login.jsp").forward(req, resp);	
+			req.getRequestDispatcher("/Project_HS/Account/Login.jsp").forward(req, resp);	
 		}		
 	}
 	
@@ -63,6 +63,4 @@ public class LoginController extends HttpServlet {
 		}
 		
 	}
-	
-
 }

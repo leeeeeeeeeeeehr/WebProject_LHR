@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
-<%@ include file="../Project_HS/include/common_head.jsp" %>
+<%@ include file="../include/common_head.jsp" %>
 
 <script>
 function validate(form) {
@@ -23,11 +23,11 @@ function validate(form) {
     <a href="#container">본문바로가기</a>
   </div>
   <div id="wrap">
-    <%@ include file="../Project_HS/include/body_header_sub.jsp" %>
+    <%@ include file="../include/body_header_sub.jsp" %>
     <main id="contaniner" class="login_page sub_container">
       <div class="contents">
         <div class="inner">
-          <div class="login_area">
+          <div class="login_area sub_area">
             <h2>ID 로그인</h2>
 <!-- 세션 확인 -->
 ${ sessionScope.userName }
@@ -55,7 +55,7 @@ ${ sessionScope.userName }
         </div>
       </div>
     </main>
-    <%@ include file="../Project_HS/include/body_footer.jsp" %>
+    <%@ include file="../include/body_footer.jsp" %>
   </div>
 </body>
 

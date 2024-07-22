@@ -1,7 +1,8 @@
-package controller;
+package controller.account;
 
 import java.io.IOException;
 
+import common.JSFunction;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -31,12 +32,12 @@ public class isLoginController extends HttpServlet {
 	                resp.sendRedirect(req.getContextPath() + "/HS/login.do");
 	                return;
 	            }
-	            req.getRequestDispatcher("/Project_HS/IsLogin.jsp").forward(req, resp);
+	            req.getRequestDispatcher("/Project_HS/Account/IsLogin.jsp").forward(req, resp);
 	        }
 	        // 로그인 안되어있으면
 	        else {
 	            // 로그인 페이지로
-	            resp.sendRedirect(req.getContextPath() + "/HS/login.do");
+	            JSFunction.alertBack(resp, "/HS/login.do");
 	        }
 	    }
 

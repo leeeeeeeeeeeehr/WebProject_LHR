@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
-<%@ include file="../Project_HS/include/common_head.jsp" %>
+<%@ include file="../include/common_head.jsp" %>
 
 <script>
 function validate(form) {
@@ -38,11 +38,11 @@ function validate(form) {
     <a href="#container">본문바로가기</a>
   </div>
   <div id="wrap">
-    <%@ include file="../Project_HS/include/body_header_sub.jsp" %>
+    <%@ include file="../include/body_header_sub.jsp" %>
     <main id="contaniner" class="regist_page sub_container">
       <div class="contents">
         <div class="inner">
-          <div class="regist_area">
+          <div class="regist_area sub_area">
             <h2>회원가입</h2>
 <form action="../HS/regist.do" method="post" name="registForm" onsubmit="return validate(this);">
   <fieldset>
@@ -69,7 +69,7 @@ function validate(form) {
         </div>
       </div>
     </main>
-    <%@ include file="../Project_HS/include/body_footer.jsp" %>
+    <%@ include file="../include/body_footer.jsp" %>
   </div>
 </body>
 
