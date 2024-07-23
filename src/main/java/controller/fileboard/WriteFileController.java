@@ -16,8 +16,8 @@ import utils.JSFunction;
 
 @WebServlet("/HS/write-file.do")
 @MultipartConfig(
-		maxFileSize = 1024 * 1024 * 1,
-		maxRequestSize = 1024 * 1024 * 10
+		maxFileSize = 102400 * 102400 * 1,
+		maxRequestSize = 102400 * 102400 * 10
 )
 public class WriteFileController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -26,13 +26,15 @@ public class WriteFileController extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 											throws ServletException, IOException {
 		
-		HttpSession session = req.getSession(false);
+		HttpSession session = req.getSession();
+		
+		if (session.getAttribute("userId") == null) {
+        	JSFunction.alertLocation(resp, "로그인 후 이용해주세요.", "../HS/login.do");
+        	return;
+        }
 		
 		if (session.getAttribute("userId") != null) {
 			req.getRequestDispatcher("/Project_HS/File/WriteFile.jsp").forward(req, resp);			
-		}
-		else {
-			JSFunction.alertLocation(resp, "로그인 후 이용해주세요.", "../HS/list-file/do");
 		}
 	}
 	
@@ -54,7 +56,7 @@ public class WriteFileController extends HttpServlet {
 			return;
 		}
 		
-		HttpSession session = req.getSession(false);
+		HttpSession session = req.getSession();
 		
 		// 제목이랑 내용 저장
 		FileBoardDTO filedto = new FileBoardDTO();
@@ -86,7 +88,7 @@ public class WriteFileController extends HttpServlet {
 				resp.sendRedirect("../HS/list-file.do");
 			}
 			else {
-				JSFunction.alertLocation(resp, "글쓰기에 실패했습니다.", "../HS/write-file.do");
+				JSFunction.alertLocation(resp, "파일을 첨부해주세요.", "../HS/write-file.do");
 			}
 		}
 	}

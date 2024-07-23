@@ -18,7 +18,11 @@ public class isLoginController extends HttpServlet {
 	    protected void doGet(HttpServletRequest req, HttpServletResponse resp) 
 	                                      throws ServletException, IOException {
 		 
-	        HttpSession session = req.getSession(false);
+	        HttpSession session = req.getSession();
+	        
+	        if (session.getAttribute("userId") == null) {
+	        	JSFunction.alertLocation(resp, "로그인 후 이용해주세요.", "../HS/login.do");
+	        }
 
 	        // 로그인 되어있으면
 	        if (session.getAttribute("userId") != null) {
@@ -40,6 +44,7 @@ public class isLoginController extends HttpServlet {
 	            JSFunction.alertBack(resp, "/HS/login.do");
 	        }
 	    }
+	 
 
 	    @Override
 	    protected void doPost(HttpServletRequest req, HttpServletResponse resp) 

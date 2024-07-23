@@ -16,8 +16,8 @@ import utils.JSFunction;
 
 @WebServlet("/HS/write-free.do")
 @MultipartConfig(
-		maxFileSize = 1024 * 1024 * 1,
-		maxRequestSize = 1024 * 1024 * 10
+		maxFileSize = 102400 * 102400 * 1,
+		maxRequestSize = 102400 * 102400 * 10
 )
 public class WriteFreeController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -26,13 +26,18 @@ public class WriteFreeController extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 											throws ServletException, IOException {
 		
-		HttpSession session = req.getSession(false);
+		HttpSession session = req.getSession();
+		
+		if (session.getAttribute("userId") == null) {
+			JSFunction.alertLocation(resp, "로그인이 필요한 서비스입니다.", "../HS/login.do");
+			return;
+		}
 		
 		if (session.getAttribute("userId") != null) {
 			req.getRequestDispatcher("/Project_HS/Free/WriteFree.jsp").forward(req, resp);			
 		}
 		else {
-			JSFunction.alertLocation(resp, "로그인 후 이용해주세요.", "../HS/list-free/do");
+			JSFunction.alertLocation(resp, "로그인 후 이용해주세요.", "../HS/list-free.do");
 		}
 	}
 	
@@ -54,7 +59,7 @@ public class WriteFreeController extends HttpServlet {
 			return;
 		}
 		
-		HttpSession session = req.getSession(false);
+		HttpSession session = req.getSession();
 		
 		// 제목이랑 내용 저장
 		FreeBoardDTO freedto = new FreeBoardDTO();

@@ -30,19 +30,25 @@ function validate(form) {
           <div class="login_area sub_area">
             <h2>ID 로그인</h2>
 <!-- 세션 확인 -->
-${ sessionScope.userName }
-<form action="../HS/login.do" method="post" name="loginForm" onsubmit="return validate(this);">
+			<form action="../HS/login.do" method="post" name="loginForm" onsubmit="return validate(this);">
               <fieldset>
                 <legend>로그인</legend>
                 <div class="row input_wrap1">
-<input type="text" name="user_id" placeholder="아이디">
+					<input type="text" name="user_id" placeholder="아이디">
                 </div>
                 <div class="row input_wrap2">
-<input type="password" name="user_pwd" placeholder="비밀번호">
+					<input type="password" name="user_pwd" placeholder="비밀번호">
                 </div>
-<input class="login_btn" type="submit" value="로그인" />
+				<div class="row row3">
+                  <div class="checkbox_wrap">
+                    <input name="save_user" type="checkbox" value="checked" />
+                    <p>로그인 상태 유지</p>
+                  </div>
+                </div>
+
+				<input class="login_btn" type="submit" value="로그인" />
               </fieldset>
-</form>
+			</form>
           </div>
           <div class="etc_area">
             <li>

@@ -2,11 +2,13 @@ package controller.account;
 
 import java.io.IOException;
 
+import common.JSFunction;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import model.HSmemberDAO;
 import model.HSmemberDTO;
 
@@ -18,7 +20,15 @@ public class RegistController extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 											throws ServletException, IOException {
 
-		req.getRequestDispatcher("/Project_HS/Account/Regist.jsp").forward(req, resp);
+		 HttpSession session = req.getSession();
+		 
+		 // 로그인 안되어있을 때만 회원가입 페이지로
+		 if (session.getAttribute("userId") == null) {
+			 req.getRequestDispatcher("/Project_HS/Account/Regist.jsp").forward(req, resp);			 
+		 }
+		 else {
+			 JSFunction.alertBack(resp, "로그아웃 후 이용해주세요.");
+		 }
 	}
 	
 	@Override

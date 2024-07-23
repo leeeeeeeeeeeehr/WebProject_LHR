@@ -28,13 +28,10 @@ function validateForm(form) {
       <div class="contents">
         <div class="inner">
           <div class="board_edit edit_area">
-          <h2>자유게시판</h2>
-          <p>※ 게시물 수정 시 첨부할 파일이 있으면 재업로드 해주세요.</p>
-<form name="editfreeFrm" method="post" enctype="multipart/form-data"
-      action="../HS/edit-free.do" onsubmit="return validateForm(this);">
-<input type="hidden" name="num" value="${ freedto.num }" />
-<input type="hidden" name="prevOfile" value="${ freedto.ofile }" />
-<input type="hidden" name="prevSfile" value="${ freedto.sfile }" />
+          <h2 class="question">Q&A</h2>
+<form name="editqnaFrm" method="post" enctype="multipart/form-data"
+      action="../HS/edit-qna.do" onsubmit="return validateForm(this);">
+<input type="hidden" name="num" value="${ qnadto.num }" />
 <table class="edit_form">
     <tr class="line">
         <td class="column">작성자</td>
@@ -42,15 +39,11 @@ function validateForm(form) {
     </tr>
     <tr class="line">
         <td class="column">제목</td>
-        <td><input type="text" name="title" value="${ freedto.title }" /></td>
+        <td><input type="text" name="title" value="${ qnadto.title }" /></td>
     </tr>
     <tr class="line">
         <td class="column">내용</td>
-        <td><textarea name="content">${ freedto.content }</textarea></td>
-    </tr>
-    <tr class="line">
-        <td class="column">첨부 파일</td>
-        <td><input type="file" name="ofile" /></td>
+        <td><textarea name="content">${ qnadto.content }</textarea></td>
     </tr>
 </table>    
               <div class="etc_area">
@@ -62,7 +55,7 @@ function validateForm(form) {
                   <button class="complete_btn" type="reset">리셋하기</button>
                 </li>
                 <li>
-                  <button class="complete_btn" onclick="location.href='../HS/view-free.do?num=${ param.num }';">뒤로가기</button>
+                  <button class="complete_btn" onclick="location.href='../HS/view-qna.do?num=${ param.num }';">뒤로가기</button>
                 </li>
              </div>
 </form>

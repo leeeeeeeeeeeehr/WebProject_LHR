@@ -24,45 +24,36 @@ function validateForm(form) {
   </div>
   <div id="wrap">
     <%@ include file="../include/body_header_sub.jsp" %>
-    <main id="container" class="edit_page sub_container">
+    
+    <main id="container" class="write_page sub_container">
       <div class="contents">
         <div class="inner">
-          <div class="board_edit edit_area">
-          <h2>자료실</h2>
-          <p>※ 게시물 수정 시 첨부할 파일이 있으면 재업로드 해주세요.</p>
-<form name="editfileFrm" method="post" enctype="multipart/form-data"
-      action="../HS/edit-file.do" onsubmit="return validateForm(this);">
-<input type="hidden" name="num" value="${ filedto.num }" />
-<input type="hidden" name="prevOfile" value="${ filedto.ofile }" />
-<input type="hidden" name="prevSfile" value="${ filedto.sfile }" />
-<table class="edit_form">
+          <div class="board_write write_area">
+         	 <h2>게시글 작성</h2>
+<form name="writeqnaFrm" method="post" enctype="multipart/form-data"
+      action="../HS/write-qna.do" onsubmit="return validateForm(this);">
+<table class="write_form">
     <tr class="line">
         <td class="column">작성자</td>
         <td><input type="text" value="${ sessionScope.userId }" readonly /></td>
     </tr>
     <tr class="line">
         <td class="column">제목</td>
-        <td><input type="text" name="title" value="${ filedto.title }" /></td>
+        <td><input type="text" name="title" /></td>
     </tr>
     <tr class="line">
         <td class="column">내용</td>
-        <td><textarea name="content">${ filedto.content }</textarea></td>
-    </tr>
-    <tr class="line">
-        <td class="column">첨부 파일</td>
-        <td><input type="file" name="ofile" /></td>
+        <td><textarea name="content"></textarea></td>
     </tr>
 </table>    
+          
               <div class="etc_area">
                 <li>
-                  <input type="hidden" name="edit" value="true" />
-                  <input class="complete_btn" type="submit" value="수정하기" />
+                  <input type="hidden" name="write" value="true" />
+                  <input class="complete_btn" type="submit" value="등록하기" />
                 </li>
                 <li>
-                  <button class="complete_btn" type="reset">리셋하기</button>
-                </li>
-                <li>
-                  <button class="complete_btn" onclick="location.href='../HS/view-file.do?num=${ param.num }';">뒤로가기</button>
+                  <a class="cancel_btn" href="../HS/list-qna.do">뒤로가기</a>
                 </li>
              </div>
 </form>

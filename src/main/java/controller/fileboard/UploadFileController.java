@@ -13,8 +13,8 @@ import utils.FileUtil;
 
 @WebServlet("/HS/upload-file.do")
 @MultipartConfig(
-		maxFileSize = 1024 * 1024 * 1,
-		maxRequestSize = 1024 * 1024 * 10
+		maxFileSize = 102400 * 102400 * 1,
+		maxRequestSize = 102400 * 102400 * 10
 )
 public class UploadFileController extends HttpServlet {
 	private static final long serialVersionUID = 1L;

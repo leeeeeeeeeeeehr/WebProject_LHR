@@ -15,12 +15,6 @@
           <div class="board_view">
             <table>
               <tr>
-                <td class="column">번호</td>
-                <td class="post">${ filedto.num }</td>
-                <td class="column">작성자</td>
-                <td class="post">${ filedto.id }</td>
-              </tr>
-              <tr>
                 <td class="column">작성일</td>
                 <td class="post">${ filedto.postdate }</td>
                 <td class="column">조회수</td>
@@ -28,7 +22,9 @@
               </tr>
               <tr>
                 <td class="column">제목</td>
-                <td class="post" colspan="3">${ filedto.title }</td>
+                <td class="post">${ filedto.title }</td>
+                <td class="column">작성자</td>
+                <td class="post">${ filedto.id }</td>
               </tr>
               <tr>
                 <td class="column">내용</td>

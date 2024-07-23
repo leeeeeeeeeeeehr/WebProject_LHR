@@ -1,4 +1,4 @@
-package controller.fileboard;
+package controller.qnaboard;
 
 import java.io.IOException;
 
@@ -9,12 +9,11 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import model.FileBoardDAO;
-import model.FileBoardDTO;
-import utils.FileUtil;
+import model.QnABoardDAO;
+import model.QnABoardDTO;
 
-@WebServlet("/HS/delete-file.do")
-public class DeleteFileController extends HttpServlet {
+@WebServlet("/HS/delete-qna.do")
+public class DeleteQnAController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
 	@Override
@@ -22,9 +21,9 @@ public class DeleteFileController extends HttpServlet {
 											throws ServletException, IOException {
 		
 		String num = req.getParameter("num");
-		FileBoardDAO filedao = new FileBoardDAO();
+		QnABoardDAO qnadao = new QnABoardDAO();
 		
-		FileBoardDTO filedto = filedao.fileView(num);
+		QnABoardDTO qnadto = qnadao.qnaView(num);
 		
 		HttpSession session = req.getSession();
 		
@@ -34,17 +33,15 @@ public class DeleteFileController extends HttpServlet {
 		}
 		
 		// 사용자 확인
-		if (session.getAttribute("userId") != null && !(filedto.getId().equals((String) session.getAttribute("userId")))) {
-			JSFunction.alertLocation(resp, "삭제 권한이 없습니다.", "../HS/view-file.do?num=" + num);
+		if (session.getAttribute("userId") != null && !(qnadto.getId().equals((String) session.getAttribute("userId")))) {
+			JSFunction.alertLocation(resp, "삭제 권한이 없습니다.", "../HS/view-qna.do?num=" + num);
 			return;
 		}
 		// 게시물 삭제
-		int result = filedao.deletePost(num);
+		int result = qnadao.deletePost(num);
 		
 		if (result == 1) {
-			String saveFileName = filedto.getSfile();
-			FileUtil.deleteFile(req, "/Project_HS/UploadsFile", saveFileName);
+			JSFunction.alertLocation(resp, "게시물이 삭제되었습니다.", "../HS/list-qna.do");
 		}
-		JSFunction.alertLocation(resp, "게시물이 삭제되었습니다.", "../HS/list-file.do");
 	}
 }

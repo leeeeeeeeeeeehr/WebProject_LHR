@@ -7,8 +7,10 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import model.FreeBoardDAO;
 import model.FreeBoardDTO;
+import utils.CookieManager;
 
 @WebServlet("/HS/view-free.do")
 public class ViewFreeController extends HttpServlet {
@@ -22,8 +24,29 @@ public class ViewFreeController extends HttpServlet {
 		FreeBoardDAO freedao = new FreeBoardDAO();
 		// 게시물 번호 가져오기
 		String num = req.getParameter("num");
-		// 조회수 증가
-		freedao.updateVisitCount(num);
+		
+		HttpSession session = req.getSession();
+		String id = (String) session.getAttribute("userId");
+		// 로그인 되어있으면
+		if (session.getAttribute("userId") != null) {
+			// 쿠키 생성
+			String ckValue = CookieManager.readCookie(req, "freeboard_"+num+"_"+id);
+			if (!ckValue.equals("read")) {
+				CookieManager.makeCookie(resp, "freeeboard_"+num+"_"+id, "read", 86400);
+				// 조회수 증가
+				freedao.updateVisitCount(num);
+			}
+		}
+		else {
+			// 쿠키 생성
+			String ckValue = CookieManager.readCookie(req, "freeboard_"+num+"_guest");
+			if (!ckValue.equals("read")) {
+				CookieManager.makeCookie(resp, "freeboard_"+num+"_guest", "read", 86400);
+				// 조회수 증가
+				freedao.updateVisitCount(num);
+			}
+		}
+		
 		// 게시물 인출
 		FreeBoardDTO freedto = freedao.freeView(num);
 		freedao.close();

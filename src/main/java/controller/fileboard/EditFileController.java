@@ -16,8 +16,8 @@ import utils.JSFunction;
 
 @WebServlet("/HS/edit-file.do")
 @MultipartConfig(
-		maxFileSize = 1024 * 1024 * 1,
-		maxRequestSize = 1024 * 1024 * 10
+		maxFileSize = 102400 * 102400 * 1,
+		maxRequestSize = 102400 * 102400 * 10
 )
 public class EditFileController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -31,9 +31,16 @@ public class EditFileController extends HttpServlet {
 		FileBoardDAO filedao = new FileBoardDAO();
 		FileBoardDTO filedto = filedao.fileView(num);
 
-		HttpSession session = req.getSession(false);
-		if (session.getAttribute("userId") != null || !(filedto.getId().equals((String) session.getAttribute("userId")))) {
+		HttpSession session = req.getSession();
+		
+		if (session.getAttribute("userId") == null) {
+        	JSFunction.alertLocation(resp, "로그인 후 이용해주세요.", "../HS/login.do");
+        	return;
+        }
+		 
+		if (session.getAttribute("userId") != null && !(filedto.getId().equals((String) session.getAttribute("userId")))) {
 			JSFunction.alertLocation(resp, "수정 권한이 없습니다.", "../HS/view-file.do?num=" + num);
+			return;
 		}
 		req.setAttribute("filedto", filedto);
 		req.getRequestDispatcher("/Project_HS/File/EditFile.jsp").forward(req, resp);
@@ -59,7 +66,7 @@ public class EditFileController extends HttpServlet {
 		String prevOfile = req.getParameter("prevOfile");
 		String prevSfile = req.getParameter("prevSfile");
 		
-		HttpSession session = req.getSession(false);
+		HttpSession session = req.getSession();
 		String id = (String) session.getAttribute("userId");
 		String title = req.getParameter("title");
 		String content = req.getParameter("content");

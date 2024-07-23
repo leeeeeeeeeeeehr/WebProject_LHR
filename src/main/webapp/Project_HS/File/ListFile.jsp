@@ -33,7 +33,7 @@
 					            <option value="content">내용</option>
 					            <option value="id">작성자</option>
 					        </select>
-					        <input type="text" name="searchWord" />
+					        <input type="text" name="searchWord" placeholder="검색어를 입력하세요." />
 					        <input class="submit_btn" type="submit" value="검색하기" />
 					    </td>
 					</tr>

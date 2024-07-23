@@ -182,18 +182,30 @@
 }
 .edit_page .edit_area h2 {
   font-weight: 500;
+  font-size: 25px;
+  margin-bottom: 20px;
+}
+.edit_page .edit_area p {
+  font-weight: 500;
   color: red;
+  font-size: 20px;
+}
+.edit_page .edit_area .question {
+  font-weight: 500;
+  color: #000;
   font-size: 20px;
 }
 
 
 
 /* 로그인 상태 유지 */
-/* .login_page .login_area .row3 {
+.login_page .login_area .row3 {
   font-size: 15px;
 }
-.login_page .login_area input[type=checkbox] + label {
-  font-size: 15px;
+.login_page .login_area input[type=checkbox] {
+	border: 1px solid #999;
+	width: 18px;
+	height: 18px;
 }
 
 

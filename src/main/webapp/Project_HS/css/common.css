@@ -294,24 +294,27 @@ input[type='number'] {
 
 /* 체크박스 */
 .checkbox_wrap {
-  display: inline-block;
-}
-input[type='checkbox'] + label {
-  color: #333;
-  cursor: pointer;
   display: inline-flex;
-  /* 폰트크기 16 * 줄간격(1.4내외) =  23px이하인 경우 하단 간격 발생 */
+  gap: 0 8px;
   vertical-align: top;
   align-items: center;
-  gap:0 8px;
 }
-input[type='checkbox'] + label::before {
-  content: '';
-  width: 18px;
-  height: 18px;
-  border: 1px solid #999;
-}
-input[type='checkbox']:checked + label::before {
+/* input[type='checkbox'] + label { */
+/*   color: #333; */
+/*   cursor: pointer; */
+/*   display: inline-flex; */
+/*   폰트크기 16 * 줄간격(1.4내외) =  23px이하인 경우 하단 간격 발생 */
+/*   vertical-align: top; */
+/*   align-items: center; */
+/*   gap:0 8px; */
+/* }] */
+/* input[type='checkbox'] + label::before { */
+/*   content: ''; */
+/*   width: 18px; */
+/*   height: 18px; */
+/*   border: 1px solid #999; */
+/* } */
+input[type='checkbox']:checked {
   background: url(../images/common/check.svg) no-repeat 50% 50% / 100%;
 }
 

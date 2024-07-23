@@ -5,12 +5,14 @@ import java.io.IOException;
 import common.JSFunction;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import model.HSmemberDAO;
 import model.HSmemberDTO;
+import utils.CookieManager;
 
 @WebServlet("/HS/login.do")
 public class LoginController extends HttpServlet {
@@ -39,13 +41,14 @@ public class LoginController extends HttpServlet {
 		// 로그인 폼에서 전송한 폼 값 받기
 		String userId = req.getParameter("user_id");
 		String userPwd = req.getParameter("user_pwd");
+		String saveUser = req.getParameter("save_user");
 		// DB 연결
 		HSmemberDAO dao = new HSmemberDAO();
 
 		HSmemberDTO dto = dao.loginMember(userId, userPwd);
 		dao.close();
 		
-		if (dto.getId() != null ) {
+		if (dto.getId() != null) {
 			HttpSession session = req.getSession();
 			session.setAttribute("userId", dto.getId());
 			session.setAttribute("userPwd", dto.getPass());
@@ -53,9 +56,12 @@ public class LoginController extends HttpServlet {
 			session.setAttribute("userEmail", dto.getEmail());
 			session.setAttribute("userPhone", dto.getPhone());
 			
-			System.out.println("Session userId: " + session.getAttribute("userId"));
-	        System.out.println("Session userPwd: " + session.getAttribute("userPwd"));
-	        System.out.println("Session userName: " + session.getAttribute("userName"));
+			if (saveUser != null && saveUser.equals("checked")) {
+				CookieManager.makeCookie(resp, userId, userId, 86400);
+			}
+			else {
+				CookieManager.deleteCookie(resp, userId);
+			}
 			
 			resp.sendRedirect("../HS/islogin.do");
 		}

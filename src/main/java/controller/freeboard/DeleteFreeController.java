@@ -11,6 +11,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import model.FreeBoardDAO;
 import model.FreeBoardDTO;
+import utils.FileUtil;
 
 @WebServlet("/HS/delete-free.do")
 public class DeleteFreeController extends HttpServlet {
@@ -25,10 +26,15 @@ public class DeleteFreeController extends HttpServlet {
 		
 		FreeBoardDTO freedto = freedao.freeView(num);
 		
-		HttpSession session = req.getSession(false);
+		HttpSession session = req.getSession();
+		
+		if (session.getAttribute("userId") == null) {
+			JSFunction.alertLocation(resp, "로그인이 필요한 서비스입니다.", "../HS/login.do");
+			return;
+		}
 		
 		// 사용자 확인
-		if (session.getAttribute("userId") != null || !(freedto.getId().equals((String) session.getAttribute("userId")))) {
+		if (session.getAttribute("userId") != null && !(freedto.getId().equals((String) session.getAttribute("userId")))) {
 			JSFunction.alertLocation(resp, "삭제 권한이 없습니다.", "../HS/view-free.do?num=" + num);
 			return;
 		}
@@ -36,10 +42,9 @@ public class DeleteFreeController extends HttpServlet {
 		int result = freedao.deletePost(num);
 		
 		if (result == 1) {
-			JSFunction.alertLocation(resp, "게시물이 삭제되었습니다.", "../HS/list-free.do");
+			String saveFileName = freedto.getSfile();
+			FileUtil.deleteFile(req, "/Project_HS/UploadsFree", saveFileName);
 		}
-		else {
-			JSFunction.alertBack(resp, "게시물 삭제 중 예외 발생");
-		}
+		JSFunction.alertLocation(resp, "게시물이 삭제되었습니다.", "../HS/list-free.do");
 	}
 }

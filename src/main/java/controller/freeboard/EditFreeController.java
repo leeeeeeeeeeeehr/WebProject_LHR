@@ -16,8 +16,8 @@ import utils.JSFunction;
 
 @WebServlet("/HS/edit-free.do")
 @MultipartConfig(
-		maxFileSize = 1024 * 1024 * 1,
-		maxRequestSize = 1024 * 1024 * 10
+		maxFileSize = 102400 * 102400 * 1,
+		maxRequestSize = 102400 * 102400 * 10
 )
 public class EditFreeController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -31,9 +31,16 @@ public class EditFreeController extends HttpServlet {
 		FreeBoardDAO freedao = new FreeBoardDAO();
 		FreeBoardDTO freedto = freedao.freeView(num);
 
-		HttpSession session = req.getSession(false);
-		if (session.getAttribute("userId") != null || !(freedto.getId().equals((String) session.getAttribute("userId")))) {
+		HttpSession session = req.getSession();
+		
+		if (session.getAttribute("userId") == null) {
+			JSFunction.alertLocation(resp, "로그인이 필요한 서비스입니다.", "../HS/login.do");
+			return;
+		}
+		
+		if (session.getAttribute("userId") != null && !(freedto.getId().equals((String) session.getAttribute("userId")))) {
 			JSFunction.alertLocation(resp, "수정 권한이 없습니다.", "../HS/view-free.do?num=" + num);
+			return;
 		}
 		req.setAttribute("freedto", freedto);
 		req.getRequestDispatcher("/Project_HS/Free/EditFree.jsp").forward(req, resp);
@@ -60,7 +67,7 @@ public class EditFreeController extends HttpServlet {
 		String prevOfile = req.getParameter("prevOfile");
 		String prevSfile = req.getParameter("prevSfile");
 		
-		HttpSession session = req.getSession(false);
+		HttpSession session = req.getSession();
 		String id = (String) session.getAttribute("userId");
 		String title = req.getParameter("title");
 		String content = req.getParameter("content");

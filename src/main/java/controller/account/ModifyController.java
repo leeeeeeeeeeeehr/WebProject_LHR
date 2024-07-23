@@ -21,7 +21,7 @@ public class ModifyController extends HttpServlet {
 											throws ServletException, IOException {
 
 		
-		HttpSession session = req.getSession(false);
+		HttpSession session = req.getSession();
 		
 		// 로그인 되어있으면
 		if (session.getAttribute("userId") != null) {
@@ -38,7 +38,7 @@ public class ModifyController extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
 											throws ServletException, IOException {
 	
-		HttpSession session = req.getSession(false);
+		HttpSession session = req.getSession();
 		
 		// 로그인 되어있으면
 		if (session.getAttribute("userId") != null) {
